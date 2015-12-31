@@ -1,0 +1,17 @@
+{
+  "name": "mongo-backup-to-s3",
+  "version": "1.0.0",
+  "description": "stream mongodb backups to S3, with ease",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.2.26",
+    "memorystream": "^0.3.1",
+    "moment": "^2.10.6",
+    "mongo-dump-stream": "^0.3.3"
+  }
+}
