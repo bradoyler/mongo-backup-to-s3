@@ -1,11 +1,18 @@
 # Mongo Backup to S3
 Easily stream mongodb backups to S3
 
+[![NPM Version][npm-image]][npm-url]
+
 ## Motivation
 Explore an inexpensive way to backup your MongoDb databases
 
 ## Get Started
 Setup an S3 bucket, run this in a cron job using a Heroku Single Dyno (worker)
+
+### Install
+```sh
+npm install mongo-backup-to-s3
+```
 
 Example:
 ```
