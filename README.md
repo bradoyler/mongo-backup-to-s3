@@ -37,3 +37,7 @@ Generated filename in S3: `backups/mongo_2015-12-30_22-16-34_mydatabase.dmp`
 
 ## Dependent modules
 This module relies heavily on [mongo-dump-stream](https://github.com/punkave/mongo-dump-stream) so it can output the 'dump' to a stream, and so we don't have to use `mongodump` (which requires a child process).
+
+[npm-image]: https://img.shields.io/npm/v/mongo-backup-to-s3.svg
+[npm-url]: https://npmjs.org/package/mongo-backup-to-s3
+
