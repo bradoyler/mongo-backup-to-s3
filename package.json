@@ -6,12 +6,27 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/bradoyler/mongo-backup-to-s3.git"
+  },
+  "keywords": [
+    "mongodb",
+    "dump",
+    "backup",
+    "streaming",
+    "s3"
+  ],
+  "author": "Brad Oyler <bradoyler@gmail.com> (github.com/bradoyler)",
+  "license": "MIT",
   "dependencies": {
     "aws-sdk": "^2.2.26",
     "memorystream": "^0.3.1",
     "moment": "^2.10.6",
     "mongo-dump-stream": "^0.3.3"
   }
+  "bugs": {
+    "url": "https://github.com/bradoyler/mongo-backup-to-s3/issues"
+  },
+  "homepage": "https://github.com/bradoyler/mongo-backup-to-s3"
 }
