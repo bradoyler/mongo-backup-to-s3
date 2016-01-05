@@ -18,8 +18,9 @@ function dumpToS3(config) {
     var urlTokens = config.mongodb.url.split('/');
     var dbName = urlTokens[urlTokens.length - 1];
 
-    var s3 = new AWS.S3();
     AWS.config.update({accessKeyId: config.s3.key, secretAccessKey: config.s3.secret});
+    var s3 = new AWS.S3();
+
 
     var tsFormat = config.s3.timestampFormat || 'YYYY-MM-DD_HH:mm:ss';
     var backupTS = moment().format(tsFormat);
