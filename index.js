@@ -7,7 +7,7 @@ function isValidConfig(config) {
     return (config.mongodb && config.s3 && config.mongodb.url && config.s3.key && config.s3.secret);
 }
 
-function dumpToS3(config) {
+function dumpToS3(config, callback) {
 
     var isValid = isValidConfig(config);
     if (!isValid) {
@@ -17,27 +17,28 @@ function dumpToS3(config) {
     var stream = new MemoryStream();
     var urlTokens = config.mongodb.url.split('/');
     var dbName = urlTokens[urlTokens.length - 1];
-
-    AWS.config.update({accessKeyId: config.s3.key, secretAccessKey: config.s3.secret});
-    var s3 = new AWS.S3();
-
-
+    var s3 = new AWS.S3({accessKeyId: config.s3.key, secretAccessKey: config.s3.secret});
     var tsFormat = config.s3.timestampFormat || 'YYYY-MM-DD_HH:mm:ss';
     var backupTS = moment().format(tsFormat);
+    var filename = 'mongo_' + backupTS + '.dmp';
 
-    var key = 'mongo_' + backupTS + '.dmp';
     if (config.s3.folder) {
-        key = config.s3.folder + '/mongo_' + backupTS + '_' + dbName + '.dmp';
+        filename = config.s3.folder + '/mongo_' + backupTS + '_' + dbName + '.dmp';
     }
 
-    var params = {Bucket: config.s3.bucket, Key: key, Body: stream};
+    var params = {Bucket: config.s3.bucket, Key: filename, Body: stream};
     var partSizeMB = config.s3.partSizeMB || 5;
     var queueSize = config.s3.queueSize || 1;
     var options = {partSize: partSizeMB * 1024 * 1024, queueSize: queueSize};
 
     s3.upload(params, options, function (err, data) {
 
-        console.log('### s3.upload complete:', err, data);
+        if(typeof callback=== 'function') {
+            callback(err, data);
+        }
+        else {
+            console.log('### s3.upload complete:', err, data);
+        }
 
     }).on('httpUploadProgress', function (evt) {
 
@@ -46,7 +47,7 @@ function dumpToS3(config) {
 
     mds.dump(config.mongodb.url, stream, function (err) {
         if (err) {
-            console.log('### mds.dump error:', err);
+            console.error('### mds.dump error:', err);
         }
         stream.end();
     });
