@@ -1,3 +1,6 @@
+### Notice: incompatible with Mongodb 3.x
+Mongodb 3.2 now has similar utility for streaming backups.
+
 # Mongo Backup to S3
 Easily stream mongodb backups to S3
 
