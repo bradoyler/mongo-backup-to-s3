@@ -1,3 +1,5 @@
+# DEPRECATED due to restore issues with driver version 2.5+
+
 ### Notice: incompatible with Mongodb 3.x
 Mongodb 3.2 now has similar utility for streaming backups.
 
